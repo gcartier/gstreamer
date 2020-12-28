@@ -2908,6 +2908,8 @@ gst_aggregator_get_type (void)
 static gboolean
 gst_aggregator_pad_has_space (GstAggregator * self, GstAggregatorPad * aggpad)
 {
+  return TRUE;
+
   guint64 max_time_level;
 
   /* Empty queue always has space */
