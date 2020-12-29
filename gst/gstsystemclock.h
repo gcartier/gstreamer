@@ -90,6 +90,9 @@ GstClock*               gst_system_clock_obtain         (void);
 GST_API
 void                    gst_system_clock_set_default    (GstClock *new_clock);
 
+GST_API
+GstClockReturn          gst_system_clock_id_wait_jitter (GstClock * clock, GstClockEntry * entry, GstClockTimeDiff * jitter);
+
 G_DEFINE_AUTOPTR_CLEANUP_FUNC(GstSystemClock, gst_object_unref)
 
 G_END_DECLS

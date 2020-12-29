@@ -387,8 +387,6 @@ static void gst_system_clock_get_property (GObject * object, guint prop_id,
 
 static GstClockTime gst_system_clock_get_internal_time (GstClock * clock);
 static guint64 gst_system_clock_get_resolution (GstClock * clock);
-static GstClockReturn gst_system_clock_id_wait_jitter (GstClock * clock,
-    GstClockEntry * entry, GstClockTimeDiff * jitter);
 static GstClockReturn gst_system_clock_id_wait_jitter_unlocked
     (GstClock * clock, GstClockEntry * entry, GstClockTimeDiff * jitter,
     gboolean restart);
@@ -1045,7 +1043,7 @@ done:
   return status;
 }
 
-static GstClockReturn
+GstClockReturn
 gst_system_clock_id_wait_jitter (GstClock * clock, GstClockEntry * entry,
     GstClockTimeDiff * jitter)
 {
