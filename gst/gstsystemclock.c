@@ -1003,8 +1003,9 @@ gst_system_clock_id_wait_jitter_unlocked (GstClock * clock,
         }
 
         /* reschedule if gst_cond_wait_until returned early or we have to reschedule after
-         * an unlock*/
+         * an unlock */
         now = gst_clock_get_time (clock);
+        mono_ts = g_get_monotonic_time ();
         diff = GST_CLOCK_DIFF (now, entryt);
 
         if (diff <= CLOCK_MIN_WAIT_TIME) {
