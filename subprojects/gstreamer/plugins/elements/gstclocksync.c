@@ -312,8 +312,7 @@ gst_clocksync_do_sync (GstClockSync * clocksync, GstClockTime running_time)
     GstClockTimeDiff ts_offset = clocksync->ts_offset;
     GstClockTimeDiff jitter;
 
-    timestamp = running_time + GST_ELEMENT (clocksync)->base_time +
-        clocksync->upstream_latency;
+    timestamp = running_time + GST_ELEMENT (clocksync)->base_time;
 
     GST_DEBUG_OBJECT (clocksync,
         "running time: %" GST_TIME_FORMAT " base time: %" GST_TIME_FORMAT
