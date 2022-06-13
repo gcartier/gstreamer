@@ -3202,6 +3202,10 @@ gst_aggregator_pad_has_space (GstAggregator * self, GstAggregatorPad * aggpad)
   if (is_live_unlocked (self) && aggpad->priv->num_buffers < 2)
     return TRUE;
 
+  /* zero latency, if there is a buffer, it's full */
+  if (!self->priv->peer_latency_live && self->priv->latency == 0)
+    return FALSE;
+
   /* On top of our latency, we also want to allow buffering up to the
    * minimum upstream latency to allow queue free sources with lower then
    * upstream latency. */
