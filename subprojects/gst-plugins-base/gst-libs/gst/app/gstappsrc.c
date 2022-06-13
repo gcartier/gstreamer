@@ -2839,6 +2839,25 @@ gst_app_src_push_buffer_list (GstAppSrc * appsrc, GstBufferList * buffer_list)
   return gst_app_src_push_internal (appsrc, NULL, buffer_list, TRUE);
 }
 
+GstFlowReturn
+gst_app_src_push_event (GstAppSrc * appsrc, GstEvent * event)
+{
+  GstAppSrcPrivate *priv;
+
+  priv = appsrc->priv;
+
+  g_mutex_lock (&priv->mutex);
+
+  gst_queue_array_push_tail (priv->queue, event);
+
+  if ((priv->wait_status & STREAM_WAITING))
+    g_cond_broadcast (&priv->cond);
+
+  g_mutex_unlock (&priv->mutex);
+
+  return GST_FLOW_OK;
+}
+
 /**
  * gst_app_src_push_sample:
  * @appsrc: a #GstAppSrc
