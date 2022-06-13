@@ -132,7 +132,7 @@ option('neon', type : 'feature', value : 'auto', description : 'NEON HTTP source
 option('nvcodec', type : 'feature', value : 'auto', description : 'NVIDIA GPU codec plugin')
 option('onnx', type : 'feature', value : 'auto', description : 'ONNX neural network plugin')
 option('openal', type : 'feature', value : 'auto', description : 'OpenAL plugin')
-option('openexr', type : 'feature', value : 'auto', description : 'OpenEXR plugin')
+option('openexr', type : 'feature', value : 'disabled', description : 'OpenEXR plugin')
 option('openh264', type : 'feature', value : 'auto', description : 'H.264 video codec plugin')
 option('openjpeg', type : 'feature', value : 'auto', description : 'JPEG2000 image codec plugin')
 option('openmpt', type : 'feature', value : 'auto', description : 'OpenMPT module music library plugin')
