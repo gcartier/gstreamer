@@ -214,6 +214,9 @@ GST_APP_API
 GstFlowReturn    gst_app_src_push_buffer_list        (GstAppSrc * appsrc, GstBufferList * buffer_list);
 
 GST_APP_API
+GstFlowReturn    gst_app_src_push_event              (GstAppSrc *appsrc, GstEvent *event);
+
+GST_APP_API
 GstFlowReturn    gst_app_src_end_of_stream           (GstAppSrc *appsrc);
 
 GST_APP_API
