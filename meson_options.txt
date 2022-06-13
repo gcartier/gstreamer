@@ -1,12 +1,12 @@
 # Subproject options
 option('python', type : 'feature', value : 'disabled')
-option('libav', type : 'feature', value : 'auto')
+option('libav', type : 'feature', value : 'disabled')
 option('libnice', type : 'feature', value : 'disabled')
 option('base', type : 'feature', value : 'enabled')
 option('good', type : 'feature', value : 'enabled')
 option('ugly', type : 'feature', value : 'auto')
 option('bad', type : 'feature', value : 'auto')
-option('devtools', type : 'feature', value : 'auto')
+option('devtools', type : 'feature', value : 'disabled')
 option('ges', type : 'feature', value : 'disabled')
 option('rtsp_server', type : 'feature', value : 'disabled')
 option('omx', type : 'feature', value : 'disabled')
@@ -42,7 +42,7 @@ option('gpl', type: 'feature', value: 'disabled',
 option('tests', type : 'feature', value : 'disabled', description : 'Build tests')
 option('examples', type : 'feature', value : 'disabled', description : 'Build examples')
 option('introspection', type : 'feature', value : 'disabled', description : 'Generate introspection data')
-option('nls', type : 'feature', value : 'auto', description : 'Enable native language support (translations)')
+option('nls', type : 'feature', value : 'disabled', description : 'Enable native language support (translations)')
 option('orc', type : 'feature', value : 'auto', description : 'Enable Optimized Inner Loop Runtime Compiler')
 option('doc', type : 'feature', value : 'disabled', description : 'Generate API documentation with hotdoc')
 option('gtk_doc', type : 'feature', value : 'disabled', description : 'Generate API documentation with gtk-doc')
@@ -50,7 +50,7 @@ option('gtk_doc', type : 'feature', value : 'disabled', description : 'Generate 
 option('package-origin', type : 'string', value : 'Unknown package origin', yield : true,
        description : 'package origin URL to use in plugins')
 
-option('gobject-cast-checks', type : 'feature', value : 'auto', yield : true,
+option('gobject-cast-checks', type : 'feature', value : 'disabled', yield : true,
        description: 'Enable run-time GObject cast checks (auto = enabled for development, disabled for stable releases)')
 option('glib-asserts', type : 'feature', value : 'enabled', yield : true,
        description: 'Enable GLib assertion (auto = enabled for development, disabled for stable releases)')

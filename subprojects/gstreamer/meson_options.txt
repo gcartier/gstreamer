@@ -25,13 +25,13 @@ option('bash-completion', type : 'feature', value : 'auto', description : 'Insta
 option('coretracers', type : 'feature', value : 'auto', description : 'Build coretracers plugin')
 
 # Common feature options
-option('examples', type : 'feature', value : 'auto', yield : true)
-option('tests', type : 'feature', value : 'auto', yield : true)
-option('benchmarks', type : 'feature', value : 'auto', yield : true)
-option('tools', type : 'feature', value : 'auto', yield : true)
-option('introspection', type : 'feature', value : 'auto', yield : true, description : 'Generate gobject-introspection bindings')
-option('nls', type : 'feature', value : 'auto', yield: true, description : 'Enable native language support (translations)')
-option('gobject-cast-checks', type : 'feature', value : 'auto', yield : true,
+option('examples', type : 'feature', value : 'disabled', yield : true)
+option('tests', type : 'feature', value : 'disabled', yield : true)
+option('benchmarks', type : 'feature', value : 'disabled', yield : true)
+option('tools', type : 'feature', value : 'disabled', yield : true)
+option('introspection', type : 'feature', value : 'disabled', yield : true, description : 'Generate gobject-introspection bindings')
+option('nls', type : 'feature', value : 'disabled', yield: true, description : 'Enable native language support (translations)')
+option('gobject-cast-checks', type : 'feature', value : 'disabled', yield : true,
        description: 'Enable run-time GObject cast checks (auto = enabled for development, disabled for stable releases)')
 option('glib-asserts', type : 'feature', value : 'enabled', yield : true,
        description: 'Enable GLib assertion (auto = enabled for development, disabled for stable releases)')
@@ -44,5 +44,5 @@ option('package-name', type : 'string', yield : true,
        description : 'package name to use in plugins')
 option('package-origin', type : 'string', value : 'Unknown package origin', yield : true,
        description : 'package origin URL to use in plugins')
-option('doc', type : 'feature', value : 'auto', yield: true,
+option('doc', type : 'feature', value : 'disabled', yield: true,
        description: 'Enable documentation.')
