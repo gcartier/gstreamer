@@ -305,6 +305,19 @@ gst_wasapi_util_hresult_to_string (HRESULT hr)
   return error_text;
 }
 
+void patch_wave_format_extensible(WAVEFORMATEX * format)
+{
+  if (format->nChannels > 2) {
+    WAVEFORMATEXTENSIBLE * fmt = (WAVEFORMATEXTENSIBLE *) format;
+    if (fmt->dwChannelMask == 0) {
+      if (fmt->Format.nChannels == 4)
+        fmt->dwChannelMask = 51;
+      else
+        GST_ERROR ("Channel mask missing");
+    }
+  }
+}
+
 gboolean
 gst_wasapi_util_get_devices (GstMMDeviceEnumerator * self,
     gboolean active, GList ** devices)
@@ -410,6 +423,8 @@ gst_wasapi_util_get_devices (GstMMDeviceEnumerator * self,
       g_free (msg);
       goto next;
     }
+    
+    patch_wave_format_extensible(format);
 
     if (!gst_wasapi_util_parse_waveformatex ((WAVEFORMATEXTENSIBLE *) format,
             gst_static_caps_get (&scaps), &caps, NULL))
@@ -466,6 +481,8 @@ gst_wasapi_util_get_device_format (GstElement * self,
 
   hr = IAudioClient_GetMixFormat (client, &format);
   HR_FAILED_RET (hr, IAudioClient::GetMixFormat, FALSE);
+    
+  patch_wave_format_extensible(format);
 
   /* WASAPI always accepts the format returned by GetMixFormat in shared mode */
   if (device_mode == AUDCLNT_SHAREMODE_SHARED)
