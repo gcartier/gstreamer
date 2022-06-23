@@ -110,6 +110,27 @@ static struct
   {SPEAKER_TOP_BACK_CENTER, GST_AUDIO_CHANNEL_POSITION_TOP_REAR_CENTER},
   {SPEAKER_TOP_BACK_RIGHT, GST_AUDIO_CHANNEL_POSITION_TOP_REAR_RIGHT}
 };
+
+static DWORD default_ch_masks[] = {
+  0,
+  KSAUDIO_SPEAKER_MONO,
+  /* 2ch */
+  KSAUDIO_SPEAKER_STEREO,
+  /* 2.1ch */
+  /* KSAUDIO_SPEAKER_3POINT0 ? */
+  KSAUDIO_SPEAKER_2POINT1,
+  /* 4ch */
+  /* KSAUDIO_SPEAKER_3POINT1 or KSAUDIO_SPEAKER_SURROUND ? */
+  KSAUDIO_SPEAKER_QUAD,
+  /* 5ch */
+  KSAUDIO_SPEAKER_5POINT0,
+  /* 5.1ch */
+  KSAUDIO_SPEAKER_5POINT1,
+  /* 7ch */
+  KSAUDIO_SPEAKER_7POINT0,
+  /* 7.1ch */
+  KSAUDIO_SPEAKER_7POINT1,
+};
 /* *INDENT-ON* */
 
 static int windows_major_version = 0;
@@ -307,13 +328,16 @@ gst_wasapi_util_hresult_to_string (HRESULT hr)
 
 void patch_wave_format_extensible(WAVEFORMATEX * format)
 {
-  if (format->nChannels > 2) {
+  WORD nChannels = format->nChannels;
+  if (nChannels > 2) {
     WAVEFORMATEXTENSIBLE * fmt = (WAVEFORMATEXTENSIBLE *) format;
-    if (fmt->dwChannelMask == 0) {
-      if (fmt->Format.nChannels == 4)
-        fmt->dwChannelMask = 51;
+    if (!fmt->dwChannelMask) {
+      GST_WARNING ("Unknown channel mask for %d channel stream", nChannels);
+
+      if (nChannels >= G_N_ELEMENTS (default_ch_masks))
+        GST_ERROR ("Too many channels %d with unknown channel mask", nChannels);
       else
-        GST_ERROR ("Channel mask missing");
+        fmt->dwChannelMask = default_ch_masks[nChannels];
     }
   }
 }
