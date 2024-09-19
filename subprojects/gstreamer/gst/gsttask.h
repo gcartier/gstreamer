@@ -148,6 +148,7 @@ struct _GstTask {
 
   /*< private >*/
   GThread         *thread;
+  gpointer        system_thread;
 
   GstTaskPrivate  *priv;
 

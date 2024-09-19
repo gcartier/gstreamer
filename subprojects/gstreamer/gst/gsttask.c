@@ -260,6 +260,7 @@ gst_task_init (GstTask * task)
   task->priv = gst_task_get_instance_private (task);
   task->running = FALSE;
   task->thread = NULL;
+  task->system_thread = NULL;
   task->lock = NULL;
   g_cond_init (&task->cond);
   SET_TASK_STATE (task, GST_TASK_STOPPED);
@@ -328,6 +329,8 @@ gst_task_configure_name (GstTask * task)
   GST_DEBUG_OBJECT (task, "Setting thread name to '%s'", name);
   if (pthread_setname_np (name))
     GST_DEBUG_OBJECT (task, "Failed to set thread name");
+
+  task->system_thread = pthread_self();
 
   GST_OBJECT_UNLOCK (task);
 #elif defined (_MSC_VER)
@@ -403,6 +406,7 @@ gst_task_func (GstTask * task)
 
   GST_OBJECT_LOCK (task);
   task->thread = NULL;
+  task->system_thread = NULL;
 
 exit:
   if (priv->leave_func) {
@@ -941,6 +945,7 @@ gst_task_join (GstTask * task)
     GST_TASK_WAIT (task);
   /* clean the thread */
   task->thread = NULL;
+  task->system_thread = NULL;
   /* get the id and pool to join */
   pool = priv->pool_id;
   id = priv->id;
