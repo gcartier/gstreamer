@@ -159,7 +159,7 @@ option('qsv', type : 'feature', value : 'disabled', description : 'Intel Quick S
 option('qt6d3d11', type : 'feature', value : 'disabled', description : 'Qt6 Direct3D11 plugin')
 option('resindvd', type : 'feature', value : 'disabled', description : 'Resin DVD playback plugin (GPL - only built if gpl option is also enabled!)')
 option('rsvg', type : 'feature', value : 'disabled', description : 'SVG overlayer and image decoder plugin')
-option('rtmp', type : 'feature', value : 'disabled', description : 'RTMP video network source and sink plugin')
+option('rtmp', type : 'feature', value : 'auto', description : 'RTMP video network source and sink plugin')
 option('sbc', type : 'feature', value : 'disabled', description : 'SBC bluetooth audio codec plugin')
 option('sctp', type : 'feature', value : 'disabled', description : 'SCTP plugin')
 option('shm', type : 'feature', value : 'disabled', description : 'Shared memory source/sink plugin')
