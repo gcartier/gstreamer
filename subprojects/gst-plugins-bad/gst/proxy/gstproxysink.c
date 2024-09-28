@@ -385,4 +385,9 @@ gst_proxy_sink_set_proxysrc (GstProxySink * self, GstProxySrc * src)
 {
   g_return_if_fail (self);
   g_weak_ref_set (&self->proxysrc, src);
+  if (!src) {
+    self->pending_sticky_events = FALSE;
+    self->sent_stream_start = FALSE;
+    self->sent_caps = FALSE;
+  }
 }
